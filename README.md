@@ -1,6 +1,6 @@
 # 简介
 
-> 北京移动BDPE维护文档
+> BDPE维护文档
 
 本文档主要包括以下内容
 -  [现场环境](environment/SUMMARY.md)
