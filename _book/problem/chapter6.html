@@ -1,0 +1,660 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <title>6.关于2016.07.27北京移动165节点故障的原因分析 · GitBook</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.0">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../suggest/SUMMARY.html" />
+    
+    
+    <link rel="prev" href="chapter5.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    简介
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../environment/SUMMARY.html">
+            
+                <a href="../environment/SUMMARY.html">
+            
+                    
+                    一、现场环境
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../environment/chapter1.html">
+            
+                <a href="../environment/chapter1.html">
+            
+                    
+                    1.北京移动现场环境配置信息
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../environment/chapter2.html">
+            
+                <a href="../environment/chapter2.html">
+            
+                    
+                    2.前置条件满足，确保条件也满足，job不自动触发
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../environment/chapter3.html">
+            
+                <a href="../environment/chapter3.html">
+            
+                    
+                    3.等待运行队列排队时间过长
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../scene/SUMMARY.html">
+            
+                <a href="../scene/SUMMARY.html">
+            
+                    
+                    二、业务场景
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../scene/chapter1.html">
+            
+                <a href="../scene/chapter1.html">
+            
+                    
+                    1.回执文件告警短信问题跟踪
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../demand/SUMMARY.html">
+            
+                <a href="../demand/SUMMARY.html">
+            
+                    
+                    三、新增需求
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../demand/chapter1.html">
+            
+                <a href="../demand/chapter1.html">
+            
+                    
+                    1.文件入库前校验
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../demand/chapter2.html">
+            
+                <a href="../demand/chapter2.html">
+            
+                    
+                    2.忽略失败节点继续执行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../demand/chapter3.html">
+            
+                <a href="../demand/chapter3.html">
+            
+                    
+                    3.BDPE告警短信内容定制
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../demand/chapter4.html">
+            
+                <a href="../demand/chapter4.html">
+            
+                    
+                    4.999回执
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../demand/chapter5.html">
+            
+                <a href="../demand/chapter5.html">
+            
+                    
+                    5.接口文件校验-新增DP节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../demand/chapter6.html">
+            
+                <a href="../demand/chapter6.html">
+            
+                    
+                    6.流程监控里Job显示排序问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="SUMMARY.html">
+            
+                <a href="SUMMARY.html">
+            
+                    
+                    四、问题定位
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="chapter1.html">
+            
+                <a href="chapter1.html">
+            
+                    
+                    1.时间触发配置触发器时，点击清除按钮，然后修改为条件触发，触发类型数据库中存储的不是1
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="chapter2.html">
+            
+                <a href="chapter2.html">
+            
+                    
+                    2.首页打开，刚进来的时候，显示的完成、未完成、失败、加锁的个数显示的是正确的，通过系统，周期和日期进行过滤之后，展示的个数就不正确了
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="chapter3.html">
+            
+                <a href="chapter3.html">
+            
+                    
+                    3.HyperFTP服务重新部署，增加文件合并功能
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="chapter4.html">
+            
+                <a href="chapter4.html">
+            
+                    
+                    4.FTP采集断连
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="chapter5.html">
+            
+                <a href="chapter5.html">
+            
+                    
+                    5.前台查看日志详情查看的非上次运行的日志
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.6" data-path="chapter6.html">
+            
+                <a href="chapter6.html">
+            
+                    
+                    6.关于2016.07.27北京移动165节点故障的原因分析
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../suggest/SUMMARY.html">
+            
+                <a href="../suggest/SUMMARY.html">
+            
+                    
+                    五、优化建议
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../suggest/chapter1.html">
+            
+                <a href="../suggest/chapter1.html">
+            
+                    
+                    1.从代码层优化磁盘空间，防止磁盘空间满的问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../suggest/chapter2.html">
+            
+                <a href="../suggest/chapter2.html">
+            
+                    
+                    2.统一资源池管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../experience/SUMMARY.html">
+            
+                <a href="../experience/SUMMARY.html">
+            
+                    
+                    六、经验分享
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../experience/chapter1.html">
+            
+                <a href="../experience/chapter1.html">
+            
+                    
+                    1.GBASE删表失败
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../experience/chapter2.html">
+            
+                <a href="../experience/chapter2.html">
+            
+                    
+                    2.节点过多，测试页面加载不出来
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../experience/chapter3.html">
+            
+                <a href="../experience/chapter3.html">
+            
+                    
+                    3.界面流程图保存问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.4" data-path="../experience/chapter4.html">
+            
+                <a href="../experience/chapter4.html">
+            
+                    
+                    4.Hive链接不释放
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="../followme.html">
+            
+                <a href="../followme.html">
+            
+                    
+                    Gitbook使用手册
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >6.关于2016.07.27北京移动165节点故障的原因分析</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="6&#x5173;&#x4E8E;20160727&#x5317;&#x4EAC;&#x79FB;&#x52A8;165&#x8282;&#x70B9;&#x6545;&#x969C;&#x7684;&#x539F;&#x56E0;&#x5206;&#x6790;">6.&#x5173;&#x4E8E;2016.07.27&#x5317;&#x4EAC;&#x79FB;&#x52A8;165&#x8282;&#x70B9;&#x6545;&#x969C;&#x7684;&#x539F;&#x56E0;&#x5206;&#x6790;</h1><blockquote><p>&#x95EE;&#x9898;&#x63CF;&#x8FF0;&#xFF1A;165agent&#x8282;&#x70B9;&#x90E8;&#x5206;&#x4EFB;&#x52A1;&#x72B6;&#x6001;&#x5F02;&#x5E38;&#x3002;</p></blockquote><h3 id="a&#x539F;&#x56E0;&#x5206;&#x6790;&#xFF1A;">a.&#x539F;&#x56E0;&#x5206;&#x6790;&#xFF1A;</h3><pre><code>&#x6700;&#x7EC8;zk&#x65AD;&#x8FDE;&#x7684;&#x539F;&#x56E0;&#x5B9A;&#x4F4D;&#x4E3A;&#xFF0C;&#x90E8;&#x5206;job&#x7684;&#x8FC7;&#x7A0B;&#x6587;&#x4EF6;&#x751F;&#x6210;&#x4E3A;&#x7A7A;&#xFF0C;&#x5BFC;&#x81F4;&#x90E8;&#x5206;&#x7EBF;&#x7A0B;&#x6B7B;&#x5FAA;&#x73AF;&#xFF0C;&#x6700;&#x7EC8;&#x5BFC;&#x81F4;zk&#x7EBF;&#x7A0B;&#x6D88;&#x606F;&#x53D1;&#x4E0D;&#x51FA;&#x53BB;&#x3002;</code></pre>
+<h5 id="1&#x67E5;&#x770B;server&#x7AEF;&#x65E5;&#x5FD7;&#xFF1A;">1.&#x67E5;&#x770B;server&#x7AEF;&#x65E5;&#x5FD7;&#xFF1A;</h5><pre><code class="lang-bash">grep <span class="hljs-string">&apos;&#x91CD;&#x542F;\|&#x6545;&#x969C;&apos;</span>  mgr_20160727.log</code></pre>
+<p><img alt="image" src="../images/agent_exception1.png"></p><h5 id="2agent&#x7F51;&#x7EDC;&#x6B63;&#x5E38;&#xFF0C;&#x4F46;cpu&#x5F88;&#x9AD8;&#xFF1A;">2.AGENT&#x7F51;&#x7EDC;&#x6B63;&#x5E38;&#xFF0C;&#x4F46;CPU&#x5F88;&#x9AD8;&#xFF1A;</h5><p>165&#x8282;&#x70B9;cpu&#x4E00;&#x76F4;&#x5F88;&#x9AD8;&#xFF0C;2000%&#x4EE5;&#x4E0A;&#xFF3B;32&#x6838;&#xFF3D;
+<img alt="image" src="../images/agent_exception2.png"></p><pre><code>&#x6301;&#x7EED;&#x9AD8;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x5C31;&#x662F; agent &#x548C;zk&#x65AD;&#x8FDE;&#xFF3B;zk&#x7EBF;&#x7A0B;&#x65E0;&#x6CD5;&#x53D1;&#x9001;&#x6D88;&#x606F;&#x7ED9;zk&#x96C6;&#x7FA4;&#xFF3D;&#xFF0C;server&#x5728;agent&#x65AD;&#x8FDE;&#x4F1A;&#x6302;&#x8D77;&#x8BE5;agent&#x4E0A;&#x6240;&#x6709;JOB&#x3002;
+&#x90E8;&#x5206;JOB&#x914D;&#x7F6E;&#x5931;&#x8D25;&#x544A;&#x8B66;&#xFF0C;&#x56E0;&#x6B64;&#x5BA2;&#x6237;&#x6709;&#x611F;&#x77E5;&#x3002;</code></pre>
+<h3 id="b&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;">b.&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</h3><h5 id="1&#x67E5;&#x770B;java&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x627E;&#x51FA;&#x5360;cpu&#x9AD8;&#x7684;&#x7EBF;&#x7A0B;&#xFF1A;">1.&#x67E5;&#x770B;java&#x4E2D;&#x7684;&#x7EBF;&#x7A0B;&#xFF0C;&#x627E;&#x51FA;&#x5360;cpu&#x9AD8;&#x7684;&#x7EBF;&#x7A0B;&#xFF1A;</h5><pre><code class="lang-bash">ps mp 5953 -o THREAD,tid</code></pre>
+<p><code>&#x5C06;cpu&#x9AD8;&#x7684;&#x7EBF;&#x7A0B;ID&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF0C;&#x5C06;&#x8BE5;ID&#x8F6C;&#x6362;&#x6210;16&#x8FDB;&#x5236;</code></p><h5 id="2&#x6253;&#x5370;java&#x8FDB;&#x7A0B;&#x7684;&#x5806;&#x6808;&#xFF1A;">2.&#x6253;&#x5370;java&#x8FDB;&#x7A0B;&#x7684;&#x5806;&#x6808;&#xFF1A;</h5><pre><code class="lang-bash">jstack 4953 </code></pre>
+<p>&#x67E5;&#x770B;&#x8BE5;&#x7EBF;&#x7A0B;&#x4F4D;&#x7F6E;&#xFF3B;&#x7EBF;&#x7A0B;&#x5FD9;&#x9664;&#x4E86;&#x6B7B;&#x9501;&#x5916;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x7A0B;&#x5E8F;&#x903B;&#x8F91;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x5982;&#x6B7B;&#x5FAA;&#x73AF;&#xFF3D;&#xFF1A;
+<img alt="image" src="../images/agent_exception3.png"></p><h5 id="3&#x6392;&#x67E5;&#x7A0B;&#x5E8F;&#x53D1;&#x73B0;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x903B;&#x8F91;&#x95EE;&#x9898;&#xFF0C;&#x8FDB;&#x5165;&#x6B7B;&#x5FAA;&#x73AF;&#xFF1A;">3.&#x6392;&#x67E5;&#x7A0B;&#x5E8F;&#x53D1;&#x73B0;&#x4EE5;&#x4E0B;&#x90E8;&#x5206;&#x903B;&#x8F91;&#x95EE;&#x9898;&#xFF0C;&#x8FDB;&#x5165;&#x6B7B;&#x5FAA;&#x73AF;&#xFF1A;</h5><h6 id="1&#x5982;&#x679C;node&#x7ED3;&#x679C;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x4E3A;&#x7A7A;&#xFF1A;">(1).&#x5982;&#x679C;node&#x7ED3;&#x679C;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x4E3A;&#x7A7A;&#xFF1A;</h6><p>ResultMonitorThread  84&#x884C;
+<img alt="image" src="../images/agent_exception4.png"></p><h6 id="2processid&#x6587;&#x4EF6;&#x4E3A;&#x7A7A;&#xFF1A;">(2).processid&#x6587;&#x4EF6;&#x4E3A;&#x7A7A;&#xFF1A;</h6><p>NodeRunServiceImpl.getProcessId 806&#x884C;
+<img alt="image" src="../images/agent_exception5.png"></p><hr><p>&#x7A0B;&#x5E8F;&#x4E3A;&#x4EC0;&#x4E48;&#x6216;&#x4EC0;&#x4E48;&#x60C5;&#x51B5;&#x4F1A;&#x6709;&#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x7EE7;&#x7EED;&#x5B9A;&#x4F4D;&#xFF3B;&#x53EF;&#x80FD;&#x7684;&#x60C5;&#x51B5;&#x6709;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x6302;&#x8D77;&#x64CD;&#x4F5C;&#x7B49;&#xFF3D;
+&#x8003;&#x8651;&#x5230;&#x4E0D;&#x80FD;&#x968F;&#x610F;&#x542F;&#x505C;agent&#xFF0C;&#x53EF;&#x4EE5;&#x6682;&#x65F6;&#x901A;&#x8FC7;&#x624B;&#x52A8;&#x5199;&#x5185;&#x5BB9;&#x5230;&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x4F7F;&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&#x3002;
+<img alt="image" src="../images/agent_exception6.png"> 
+<img alt="image" src="../images/agent_exception7.png"> 
+&#x56E0;&#x6B64;&#x7EF4;&#x62A4;&#x5728;cpu&#x9AD8;&#x7684;&#x60C5;&#x51B5;&#x4E0B; &#x8981;&#x91CD;&#x70B9;&#x76D1;&#x63A7;&#x4E0B;  tmp &#x76EE;&#x5F55;&#x4E0B;&#x7684;process&#x6587;&#x4EF6;  &#x548C;runlog&#x4E0B;&#x7684; &#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x6709;&#x7A7A;&#x6587;&#x4EF6;&#xFF0C;&#x786E;&#x8BA4;&#x95EE;&#x9898;&#x540E;&#x624B;&#x5DE5;&#x5904;&#x7406;&#x6389;&#x3002;</p>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="chapter5.html" class="navigation navigation-prev " aria-label="Previous page: 5.前台查看日志详情查看的非上次运行的日志">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../suggest/SUMMARY.html" class="navigation navigation-next " aria-label="Next page: 五、优化建议">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"6.关于2016.07.27北京移动165节点故障的原因分析","level":"1.5.6","depth":2,"next":{"title":"五、优化建议","level":"1.6","depth":1,"path":"suggest/SUMMARY.md","ref":"suggest/SUMMARY.md","articles":[{"title":"1.从代码层优化磁盘空间，防止磁盘空间满的问题","level":"1.6.1","depth":2,"path":"suggest/chapter1.md","ref":"suggest/chapter1.md","articles":[]},{"title":"2.统一资源池管理","level":"1.6.2","depth":2,"path":"suggest/chapter2.md","ref":"suggest/chapter2.md","articles":[]}]},"previous":{"title":"5.前台查看日志详情查看的非上次运行的日志","level":"1.5.5","depth":2,"path":"problem/chapter5.md","ref":"problem/chapter5.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"problem/chapter6.md","mtime":"2016-08-01T07:33:52.000Z","type":"markdown"},"gitbook":{"version":"3.2.0","time":"2016-08-01T07:42:23.656Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
